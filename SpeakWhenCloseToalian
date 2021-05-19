@@ -1,0 +1,55 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpeakWhenCloseToalian : MonoBehaviour {
+    private Vector3 newStartPosition;
+
+  
+    private bool alsodoThisOnce;
+    public AudioClip ohNo;
+    public static int deathScore;
+    // Use this for initialization
+    void Start () {
+        newStartPosition = transform.position;
+        
+  
+        alsodoThisOnce = true;
+    }
+	
+	// Update is called once per frame
+	void Update () {
+
+        float curDistance;
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closest = null;
+        float dist = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - position;
+            curDistance = diff.sqrMagnitude;
+            if (curDistance < dist)
+            {
+                closest = go;
+                dist = curDistance;
+
+            }
+        }
+    
+        if (dist > 10) { alsodoThisOnce = true; }
+
+        if (dist < 3)
+        {
+            if (alsodoThisOnce)
+            {
+                deathScore -= 10;
+                transform.position = newStartPosition;
+                AudioSource.PlayClipAtPoint(ohNo, newStartPosition);
+                alsodoThisOnce = false;
+            }
+
+        }
+    }
+}
