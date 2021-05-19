@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FacePlayer : MonoBehaviour {
+
+
+    // The object whose rotation we want to match.
+   private Transform playerTran;
+    private void Start()
+    {
+        playerTran = GameObject.Find("Player").GetComponent<Transform>();
+    }
+    // Angular speed in degrees per sec.
+    public float rotationSpeed = 1f;
+
+    private void Update()
+    {
+        // The step size is equal to speed times frame time.
+        var step = rotationSpeed * Time.deltaTime;
+
+        // Rotate our transform a step closer to the target's.
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, playerTran.rotation, step);
+    }
+}
