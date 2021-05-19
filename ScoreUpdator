@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ScoreUpdator : MonoBehaviour {
+    public int score; // in the other script the variable coins will 
+                      // be defined          public static int coins;
+    public int highScoreInt = 0;                    // using the word static means the variable can be accessed else where
+
+    public Text highScore;
+
+    public Text score1;
+    private void Start()
+    {
+        highScore.text ="HIGHSCORE: "+ PlayerPrefs.GetInt("highScoreInt2").ToString();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        score = Health.score + SpeakWhenCloseToalian.deathScore; ; // We need to acces the coins value that is stored in a different script
+        score1.text = "SCORE: "+score.ToString("0");
+        if (score > PlayerPrefs.GetInt("highScoreInt2", 0))
+        {
+            PlayerPrefs.SetInt("highScoreInt2", score);
+            highScore.text = "HIGHSCORE: "+score.ToString();
+        }
+    }
+}
