@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TriggerSpawner : MonoBehaviour {
+    public GameObject spawner;
+   private bool spawnTrue;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "Player")
+        {
+            spawnTrue = false;
+            spawner.SetActive(spawnTrue);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.name == "Player")
+        {
+            spawnTrue = true;
+            spawner.SetActive(spawnTrue);
+        }
+    }
+
+}
