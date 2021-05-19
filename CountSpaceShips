@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class CountSpaceShips : MonoBehaviour {
+
+    public Text gameCompleted;
+    public Text youAreAlone;
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        if (gos.Length<10)
+        {
+            gameCompleted.text = "GAME COMPLETED ";
+           youAreAlone.text = "You are alone! ";
+           
+        }
+        if (gos.Length < 9)
+        {
+            gameCompleted.text = " ";
+            youAreAlone.text = " ";
+
+        }
+    }
+}
