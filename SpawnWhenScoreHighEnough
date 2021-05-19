@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpawnWhenScoreHighEnough : MonoBehaviour {
+    public GameObject prefabToSpawn;                // The prefab that should be spawned
+    public int score1;                                           // Use this for initialization
+   public bool doThisOnlyOnce;
+
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        score1 = Health.score;
+        if (doThisOnlyOnce)
+        { if (score1 > 50)
+            {
+                Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
+                doThisOnlyOnce = false;
+            }
+        }
+       
+	}
+}
